@@ -21,6 +21,8 @@ class MailViewController: UITableViewController {
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
+        tableView.backgroundView = UIImageView(image: #imageLiteral(resourceName: "Background"))
+        
         tableView.allowsSelection = true
         tableView.allowsMultipleSelectionDuringEditing = true
         
@@ -114,7 +116,7 @@ extension MailViewController: SwipeTableViewCellDelegate {
             return [read]
         } else {
             let flag = SwipeAction(style: .default, title: configureTitle("Flag"), handler: nil)
-            flag.backgroundColor = #colorLiteral(red: 1, green: 0.5803921569, blue: 0, alpha: 1)
+            flag.backgroundEffect = UIBlurEffect(style: .light)
             flag.hidesWhenSelected = true
             flag.image = configureImage(#imageLiteral(resourceName: "Flag"))
             
@@ -122,6 +124,7 @@ extension MailViewController: SwipeTableViewCellDelegate {
                 self.emails.remove(at: indexPath.row)
             }
             delete.image = configureImage(#imageLiteral(resourceName: "Trash"))
+            delete.backgroundEffect = UIBlurEffect(style: .light)
             
             let cell = tableView.cellForRow(at: indexPath) as! MailCell
             let closure: (UIAlertAction) -> Void = { _ in cell.hideSwipe(animated: true) }
@@ -137,6 +140,7 @@ extension MailViewController: SwipeTableViewCellDelegate {
                 self.present(controller, animated: true, completion: nil)
             }
             more.image = configureImage(#imageLiteral(resourceName: "More"))
+            more.backgroundEffect = UIBlurEffect(style: .light)
 
             return [delete, flag, more]
         }
@@ -147,6 +151,7 @@ extension MailViewController: SwipeTableViewCellDelegate {
         options.expansionStyle = orientation == .left ? .selection : .destructive
         options.transitionStyle = defaultOptions.transitionStyle
         options.buttonSpacing = 11
+        options.backgroundColor = .clear
         return options
     }
     

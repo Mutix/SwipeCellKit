@@ -109,15 +109,23 @@ class SwipeActionsView: UIView {
             button.updateContentEdgeInsets(withContentWidth: minimumButtonWidth, for: orientation)
             button.maximumImageHeight = maximumImageHeight
             button.verticalAlignment = options.buttonVerticalAlignment
-
-            addSubview(button)
+            
+            if let effect = actions[index].backgroundEffect {
+                let effectView = UIVisualEffectView(effect: effect)
+                effectView.frame = button.bounds
+                effectView.contentView.backgroundColor = button.backgroundColor
+                effectView.contentView.addSubview(button)
+                addSubview(effectView)
+            } else {
+                addSubview(button)
+            }
         }
         
         return buttons
     }
     
     func actionTapped(button: SwipeActionButton) {
-        guard let index = subviews.index(of: button) else { return }
+        guard let index = buttons.index(of: button) else { return }
 
         delegate?.swipeActionsView(self, didSelect: actions[index])
     }

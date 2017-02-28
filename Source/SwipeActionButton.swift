@@ -31,6 +31,10 @@ class SwipeActionButton: UIButton {
             }
         }
 
+        if action.backgroundEffect != nil {
+            backgroundColor = nil
+        }
+        
         originalBackgroundColor = backgroundColor
         
         tintColor = action.textColor ?? .white
