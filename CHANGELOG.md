@@ -2,6 +2,55 @@
 
 `SwipeCellKit` adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.7.0](https://github.com/jerkoch/SwipeCellKit/releases/tag/1.7.0)
+
+#### Added
+
+- Support for iOS 9. Thanks to @DMCApps!
+- Showcase link in the README to track apps using the framework. Please submit a pull request to add your app!
+
+#### Updated
+
+- The *Advanced Customization* section in the README and moved it to a separate file.
+- The *Requirements* section in the README to reflect iOS 9 support.
+
+---
+
+## [1.6.1](https://github.com/jerkoch/SwipeCellKit/releases/tag/1.6.1)
+
+#### Fixed
+
+- Issue where transitions are messed up when `expansionStyle` is set to `nil`.
+
+---
+
+## [1.6.0](https://github.com/jerkoch/SwipeCellKit/releases/tag/1.6.0)
+
+#### Added
+
+- Fully customizable expansion styles. See README documentation for more details. (#14)
+- `SwipeTableViewDelegate` delegate methods for `willBeginEditingRowAt` and `didEndEditingRowAt`. (#18)
+
+#### Fixed
+
+- Removed action view cleanup when cell moved moved off UIWindow. Initially, this was added to prevent retain cycles caused by `SwipeAction` handlers capturing `self`.  Instead, it should be left up to the implementor to use `[weak self]` in handler implementations or ensure the action view is hidden before dismissing/popping a temporary parent view controller.  I've verified this behaves the same way as `UITableViewRowAction`. (#23)
+- Issue where the table view pan gesture was being disabled along with all other table view gestures when a cell was swiped. (#21)
+
+---
+
+## [1.5.0](https://github.com/jerkoch/SwipeCellKit/releases/tag/1.5.0)
+
+#### Fixed
+
+- Issue where the destructive action animation relied on the table view to animate covering the deleted cell with the cells below it in order for its height to appear to shrink. If the cell being deleted was the last row, or the remaining cells below were not tall enough, the height of the deleted cell would not appear to shrink. Fixed by adding a mask to cell and animate its height to zero. (#15)
+- Missing call to `super.didMoveToSuperview` causing accessory taps to be ignored. (#16)
+- The previous action button `textColor` fix to re-add also setting the tint color to the text color. The tint color effects button images rendered as template images.
+
+#### Added
+
+- Ability to programmatically show swipe actions. (#13)
+- Support for action background effect. (#10)
+
 ---
 
 ## [1.4.0](https://github.com/jerkoch/SwipeCellKit/releases/tag/1.4.0)
